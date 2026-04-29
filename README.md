@@ -1,6 +1,12 @@
 # Workable/confluence-docs-as-code
 
-Hardened GitHub Action by [Chainguard](https://www.chainguard.dev).
+Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at [https://github.com/Workable/confluence-docs-as-code](https://github.com/Workable/confluence-docs-as-code).
+
+## Versions
+
+| Version | Tag | Upstream commit |
+|---------|-----|-----------------|
+| v1.6.0 | [`v1.6.0`](https://github.com/chainguard-actions/confluence-docs-as-code/tree/v1.6.0) | — |
 
 ## Privacy
 
