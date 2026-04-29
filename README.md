@@ -1,5 +1,7 @@
 # Workable/confluence-docs-as-code
 
+Gihub action to publish MkDocs documentation to Atlassian Confluence Cloud wiki.
+
 Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at [https://github.com/Workable/confluence-docs-as-code](https://github.com/Workable/confluence-docs-as-code).
 
 ## Versions
