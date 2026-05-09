@@ -2,5 +2,6 @@
   "owner": "Workable",
   "name": "confluence-docs-as-code",
   "visibility": "internal",
-  "description": "Gihub action to publish MkDocs documentation to Atlassian Confluence Cloud wiki."
+  "description": "Gihub action to publish MkDocs documentation to Atlassian Confluence Cloud wiki.",
+  "block_publish": false
 }
