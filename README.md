@@ -8,7 +8,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
-| v1.6.0 | [`v1.6.0`](https://github.com/chainguard-actions/Workable-confluence-docs-as-code/tree/v1.6.0) | — |
+| v1.6.0 | [`v1.6.0`](https://github.com/chainguard-actions/Workable-confluence-docs-as-code/tree/v1.6.0) | [`0122594`](https://github.com/Workable/confluence-docs-as-code/commit/0122594353ab35ab84850c61a7e8a40f5768a4c7) |
 
 ## Privacy
 
