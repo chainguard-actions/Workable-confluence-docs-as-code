@@ -1,0 +1,38 @@
+name: Test invalid mkdocs.yml error handling (missing nav)
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Create invalid mkdocs.yml (missing nav field)
+        run: |
+          cat > "$GITHUB_WORKSPACE/mkdocs.yml" << 'EOF'
+          site_name: Test Documentation
+          repo_url: https://github.com/test-org/test-repo
+          # nav is intentionally missing to trigger validation error
+          EOF
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          confluence_tenant: fake-tenant
+          confluence_space: TESTSPACE
+          confluence_user: test@example.com
+          confluence_token: fake-token-12345
+          kroki_enabled: 'no'
+
+      - name: Assert action failed due to invalid mkdocs.yml (missing nav)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed as expected when mkdocs.yml is missing nav"
+          else
+            echo "FAIL: expected failure when mkdocs.yml has no nav, got '$OUTCOME'"
+            exit 1
+          fi

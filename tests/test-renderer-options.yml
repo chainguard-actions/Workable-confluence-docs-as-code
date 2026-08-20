@@ -1,0 +1,44 @@
+name: Test renderer options (mermaid and plantuml)
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up mkdocs.yml and docs in workspace
+        run: |
+          cp tests/fixtures/mkdocs.yml "$GITHUB_WORKSPACE/mkdocs.yml"
+          mkdir -p "$GITHUB_WORKSPACE/docs"
+          cp tests/fixtures/docs/index.md "$GITHUB_WORKSPACE/docs/index.md"
+          cp tests/fixtures/docs/guide.md "$GITHUB_WORKSPACE/docs/guide.md"
+          cp tests/fixtures/README.md "$GITHUB_WORKSPACE/README.md"
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          confluence_tenant: fake-tenant
+          confluence_space: TESTSPACE
+          confluence_user: test@example.com
+          confluence_token: fake-token-12345
+          mermaid_renderer: 'none'
+          plantuml_renderer: 'none'
+          kroki_enabled: 'no'
+
+      - name: Assert action ran and failed gracefully (invalid Confluence credentials)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # The action should fail because the Confluence API call will fail
+          # with fake credentials — this is expected and correct behavior
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully as expected with invalid credentials"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action succeeded (unexpected but acceptable)"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi

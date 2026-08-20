@@ -1,0 +1,5 @@
+site_name: Test Documentation
+repo_url: https://github.com/test-org/test-repo
+nav:
+  - Introduction: index.md
+  - Guide: guide.md

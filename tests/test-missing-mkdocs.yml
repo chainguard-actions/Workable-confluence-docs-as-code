@@ -1,0 +1,35 @@
+name: Test missing mkdocs.yml error handling
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Ensure no mkdocs.yml exists in workspace root
+        run: |
+          rm -f "$GITHUB_WORKSPACE/mkdocs.yml"
+          echo "Confirmed: no mkdocs.yml in workspace"
+
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          confluence_tenant: fake-tenant
+          confluence_space: TESTSPACE
+          confluence_user: test@example.com
+          confluence_token: fake-token-12345
+          kroki_enabled: 'no'
+
+      - name: Assert action failed due to missing mkdocs.yml
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed as expected when mkdocs.yml is missing"
+          else
+            echo "FAIL: expected failure when mkdocs.yml is missing, got '$OUTCOME'"
+            exit 1
+          fi
