@@ -4,8 +4,13 @@
   "version": "v1.6.0",
   "commit_sha": "0122594353ab35ab84850c61a7e8a40f5768a4c7",
   "url": "https://github.com/Workable/confluence-docs-as-code",
-  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "policy_sha": "374911c4be584df24e6da57af2d990570ef0f859",
   "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
   "test_agent_version": "2",
-  "harden_agent_version": "2"
+  "harden_agent_version": "2",
+  "dist_artifact": {
+    "gcs_uri": "gs://patch-actions-node-artifacts/dist-artifacts/Workable/confluence-docs-as-code/v1.6.0/sha256-9c6817570975720e2904b37d03c291bdd9db48ceaa13945b105c10cd040c49c1.tar.gz",
+    "sha256": "9c6817570975720e2904b37d03c291bdd9db48ceaa13945b105c10cd040c49c1",
+    "size_bytes": 501652
+  }
 }
